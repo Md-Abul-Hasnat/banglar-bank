@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banglar Bank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+        <section id="login-section">
+            <h1 class="text-center">Welcome to Banglar Bank</h1>
+            <div id="login-area">
+                <h2 id="login">Login</h2>
+                <input type="text" class="form-control" placeholder="Email">
+                <br>
+                <input type="password" class="form-control" placeholder="Password" name="" id="">
+                <br>
+                <button id="login-btn" class="btn btn-success">Enter</button>
+            </div>
+        </section>
+
+        <section id="transaction-area">
+            <div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="deposit status">
+                            <h5 class="transection-text">Deposit</h5>
+                            <h2 class="money">$$ <span id="total-deposit"> 00 </span> </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="withdraw status">
+                            <h5 class="transection-text">Withdraw</h5>
+                            <h2 class="money">$$ <span id="total-withdraw">00</span> </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="balance status">
+                            <h5 class="transection-text">Balance</h5>
+                            <h2 class="money">$$ <span id="total-balance">1000</span> </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div class="bank-area deposit-area">
+                        <h4 class="money">Deposit</h4>
+                        <input type="text" id="deposit-amount" class="form-control" placeholder="$ amount you want to deposit">
+                        <br>
+                        <button id="deposit-btn" class="btn btn-success">Deposit</button>
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <div class="bank-area ">
+                        <h4 class="money">Withdraw</h4>
+                        <input id="withdraw-amount" type="text" class="form-control" placeholder="$ amount you want to withdraw">
+                        <br>
+                        <button id="withdraw-btn" class="btn btn-success">Withdraw</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <script>
+            //login btn event handler
+                 const loginBtn = document.getElementById("login-btn");
+                    loginBtn.addEventListener("click",function(){
+                const loginSection = document.getElementById("login-section");
+                    loginSection.style.display="none";
+                const transaction = document.getElementById("transaction-area");
+                    transaction.style.display="block";
+            })
+
+            //deposit btn event handler
+
+                 const depositBtn = document.getElementById("deposit-btn");
+                    depositBtn.addEventListener("click",function(){
+
+                const depositNumber = parseInput("deposit-amount");;
+
+                 document.getElementById("deposit-amount").value = "";
+                 
+                 spanUpdate("total-deposit",depositNumber);
+                 spanUpdate("total-balance",depositNumber);
+
+            })
+
+            // withdraw btn event handler
+
+            const withdrawBtn = document.getElementById("withdraw-btn");
+                withdrawBtn.addEventListener("click",function(){
+
+            const withdrawNumber = parseInput("withdraw-amount");
+            
+                document.getElementById("withdraw-amount").value = "";
+
+               spanUpdate("total-withdraw", withdrawNumber);    
+               spanUpdate("total-balance", -1* withdrawNumber); 
+
+            })
+
+            function parseInput(id) {
+                const amount = document.getElementById(id).value;
+                const amountNumber = parseFloat(amount);
+                return amountNumber;
+            }
+
+            function spanUpdate(id,Number) {
+                const current = document.getElementById(id).innerText;
+                const currentNumber = parseFloat(current);
+                const total = currentNumber + Number;
+                document.getElementById(id).innerText = total;
+            }
+
+            
+
+        </script>
+</body>
+</html>
